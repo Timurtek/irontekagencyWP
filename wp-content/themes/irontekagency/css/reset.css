@@ -197,10 +197,12 @@ h1,h2,h3,h4,h5,h6{
 .services_cat{
   text-align: center;
 }
-.services_cat button span.caret{
+button .caret,
+a .caret{
   transition: all .2s ease;
 }
-.services_cat.open button span.caret{
+.open button .caret,
+.open a .caret{
   -ms-transform: rotate(180deg); /* IE 9 */
     -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
     transform: rotate(180deg);
