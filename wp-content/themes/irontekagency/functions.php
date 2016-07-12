@@ -118,7 +118,7 @@ function irontekagency_scripts() {
 	wp_enqueue_style( 'irontekagency-style', get_stylesheet_uri() );
   wp_enqueue_script( 'irontekagency-jquery', 'https://code.jquery.com/jquery-1.9.1.min.js', array(), '20151215', true );
 	wp_enqueue_script( 'irontekagency-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
-	wp_enqueue_script( 'irontekagency-bootstrapjs', get_template_directory_uri() . '/js/bootstrap.min.js', array(), '20151215', true );
+	wp_enqueue_script( 'irontekagency-bootstrapjs', get_template_directory_uri() . '/js/bootstrap.min.js', array(), '20151216', true );
   wp_enqueue_script( 'irontekagency-func', get_template_directory_uri() . '/js/func.js', array(), '20151216', true );
 	wp_enqueue_script( 'irontekagency-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
 //https://code.jquery.com/jquery-3.0.0.min.js
@@ -274,3 +274,198 @@ function footer4_init() {
 
 }
 add_action( 'widgets_init', 'footer4_init' );
+
+function blog_sidebar_init() {
+
+	register_sidebar( array(
+		'name'          => 'Blog Sidebar',
+		'id'            => 'blog_sidebar',
+		'before_title'  => '<h2>',
+		'after_title'   => '</h2>')
+	);
+
+}
+add_action( 'widgets_init', 'blog_sidebar_init' );
+
+function login_area_init() {
+
+	register_sidebar( array(
+		'name'          => 'Login Area',
+		'id'            => 'login_area',
+		'before_title'  => '<h2>',
+		'after_title'   => '</h2>')
+	);
+
+}
+add_action( 'widgets_init', 'login_area_init' );
+
+
+
+//favicon
+function childtheme_favicon() { ?>
+<link rel="shortcut icon" href="<?php echo bloginfo('stylesheet_directory') ?>/favico.ico" />
+<link rel="apple-touch-icon-precomposed" href="<?php echo bloginfo('stylesheet_directory') ?>/images/iphone-icon.png"/>
+<?php }
+add_action('wp_head', 'childtheme_favicon');
+
+
+function my_custom_login() {
+echo '<link rel="stylesheet" type="text/css" href="' . get_bloginfo('stylesheet_directory') . '/css/custom-login.min.css" />';
+}
+add_action('login_head', 'my_custom_login');
+
+
+
+function admin_login_redirect( $redirect_to, $request, $user ){
+  global $user;
+  if( isset( $user->roles ) && is_array( $user->roles ) ) {
+    if( in_array( "administrator", $user->roles ) ) {
+    return $redirect_to;
+    }else {
+    return home_url();
+    }
+  }
+  else{ return $redirect_to; }
+}
+add_filter("login_redirect", "admin_login_redirect", 10, 3);
+
+
+function my_login_logo_url() {
+  return get_bloginfo( 'url' );
+}
+add_filter( 'login_headerurl', 'my_login_logo_url' );
+
+function my_login_logo_url_title() {
+  return 'Your Site Name and Info';
+}
+add_filter( 'login_headertitle', 'my_login_logo_url_title' );
+
+
+/**
+ * Generate custom search form
+ *
+ * @param string $form Form HTML.
+ * @return string Modified form HTML.
+
+ */
+function wpdocs_my_search_form( $form ) {
+    $form = '<form role="search" method="get" id="searchform" class="searchform" action="' . home_url( '/' ) . '" >
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Search for..." value="' . get_search_query() . '" name="s" id="s">
+      <span class="input-group-btn">
+        <button class="btn default-btn dark" type="submit" id="searchsubmit" value="'. esc_attr__( 'Search' ) .'"><i class="fa fa-search" aria-hidden="true"></i></button>
+      </span>
+    </div>
+    </form>';
+
+    return $form;
+}
+add_filter( 'get_search_form', 'wpdocs_my_search_form' );
+
+
+//remove width and height from featured post thumbnail images
+add_filter( 'post_thumbnail_html', 'remove_width_attribute', 10 );
+add_filter( 'image_send_to_editor', 'remove_width_attribute', 10 );
+
+function remove_width_attribute( $html ) {
+   $html = preg_replace( '/(width|height)="\d*"\s/', "", $html );
+   return $html;
+}
+//remove class from the_post_thumbnail
+function the_post_thumbnail_remove_class($output) {
+        $output = preg_replace('/class=".*?"/', '', $output);
+        return $output;
+}
+add_filter('post_thumbnail_html', 'the_post_thumbnail_remove_class');
+
+
+//short title
+function short_title($pos){
+  $pos=strpos($content, ' ', 200);
+  substr($content,0,$pos );
+
+  return $content;
+}
+
+
+//Pagination// Numbered Pagination
+function pagination($pages = '', $range = 4)
+{
+     $showitems = ($range * 2)+1;
+
+     global $paged;
+     if(empty($paged)) $paged = 1;
+
+     if($pages == '')
+     {
+         global $wp_query;
+         $pages = $wp_query->max_num_pages;
+         if(!$pages)
+         {
+             $pages = 1;
+         }
+     }
+
+     if(1 != $pages)
+     {
+         echo "<div class=\"pagination\"><span>Page ".$paged." of ".$pages."</span>";
+         if($paged > 2 && $paged > $range+1 && $showitems < $pages) echo "<a href='".get_pagenum_link(1)."'>&laquo; First</a>";
+         if($paged > 1 && $showitems < $pages) echo "<a href='".get_pagenum_link($paged - 1)."'>&lsaquo; Previous</a>";
+
+         for ($i=1; $i <= $pages; $i++)
+         {
+             if (1 != $pages &&( !($i >= $paged+$range+1 || $i <= $paged-$range-1) || $pages <= $showitems ))
+             {
+                 echo ($paged == $i)? "<span class=\"current\">".$i."</span>":"<a href='".get_pagenum_link($i)."' class=\"inactive\">".$i."</a>";
+             }
+         }
+
+         if ($paged < $pages && $showitems < $pages) echo "<a href=\"".get_pagenum_link($paged + 1)."\">Next &rsaquo;</a>";
+         if ($paged < $pages-1 &&  $paged+$range-1 < $pages && $showitems < $pages) echo "<a href='".get_pagenum_link($pages)."'>Last &raquo;</a>";
+         echo "</div>\n";
+     }
+}
+
+
+  //shortcode check
+  function price_id($tempCheck){
+
+    $tempContent = get_the_content();
+    $tempVerify = strpos($tempContent,$tempCheck);
+    $pattern = '@purchase_link id="(.*?)"@si';
+    preg_match_all($pattern,$tempContent,$matches);
+
+    if(!$tempVerify === false) {
+      $idnum = $matches[1][0];
+      return $idnum;
+    }
+  }
+
+  function price_id2(){
+    echo get_post_meta($post->ID, $download , true);
+  }
+
+
+
+//user profile methods
+  function modify_contact_methods($profile_fields) {
+
+  	// Add new fields
+  	$profile_fields['twitter'] = 'Twitter Username';
+  	$profile_fields['facebook'] = 'Facebook URL';
+  	$profile_fields['gplus'] = 'Google+ URL';
+    $profile_fields['github'] = 'Github';
+    $profile_fields['dribbble'] = 'Dribbble';
+    $profile_fields['behance'] = 'Behance';
+
+  	// Remove old fields
+  	unset($profile_fields['aim']);
+
+  	return $profile_fields;
+  }
+  add_filter('user_contactmethods', 'modify_contact_methods');
+
+
+  @ini_set( 'upload_max_size' , '64M' );
+  @ini_set( 'post_max_size', '64M');
+  @ini_set( 'max_execution_time', '300' );

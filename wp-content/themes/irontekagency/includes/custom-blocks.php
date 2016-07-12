@@ -175,21 +175,26 @@ function service_tile_shortcode( $atts ) {
 
 /* These arguments are going to function like variables, allowing us to set new values in the front-end editor */
   $a = shortcode_atts( array(
- 'svg_code' => 'SVG Code',
  'service_link_class' => 'Service Tile Class',
  'service_link' => 'Service Link',
- 'service_text' => 'Service Text'
+ 'service_text' => 'Service Text',
+ 'image_id' => 'Image'
  ), $atts );
+
+ $raw_image = new WP_Query( array( 'post_type' => 'attachment', 'attachment_id' => $a['image_id'] ));
+ $image_url = $raw_image->posts[0]->guid;
 
  /* This is going to be our output */
  return "
   <div class='service_tile'>
     <div class='thumbnail'>
-      {$a['svg_code']}
+      <a class='gray_content' href='".esc_url( home_url( '/' ) )."{$a['service_link']}'>
+        <img src='{$image_url}' />
+      </a>
     </div>
     <div class='title'>
       <a class='gray_content {$a['service_link_class']}' href='".esc_url( home_url( '/' ) )."{$a['service_link']}'>
-        {$a['service_text']}
+        <h3>{$a['service_text']}</h3>
       </a>
     </div>
   </div>
@@ -208,11 +213,11 @@ function service_tile_WithVC() {
       "category" => __( "Content", "my-text-domain"),
       "params" => array(
          array(
-           'type' => 'textarea',
-           'heading' => __( 'SVG Code' ),
-           'param_name' => 'svg_code',
-           'value' => __( 'Default Button Text' ),
-           'description' => __( 'Enter button text here' )
+           'type' => 'attach_image',
+           'heading' => __( 'Image' ),
+           'param_name' => 'image_id',
+           'value' => __( 'Select an image' ),
+           'description' => __( 'Select an image' )
          ),
          array(
            'type' => 'textfield',
@@ -261,15 +266,11 @@ function services_cat_shortcode( $atts ) {
  return "
  <div class='services_cat_btn margin-top-md'>
     <select class='form-control'>
-      <option link='".esc_url( home_url( '/' ) )."branding'>BRANDING</option>
-      <option link='".esc_url( home_url( '/' ) )."web-design-and-development'>WEB DESIGN</option>
-      <option link='".esc_url( home_url( '/' ) )."branding'>APP DESIGN</option>
-      <option link='".esc_url( home_url( '/' ) )."branding'>LANDING PAGE</option>
-      <option link='".esc_url( home_url( '/' ) )."branding'>STRATEGY</option>
-      <option link='".esc_url( home_url( '/' ) )."branding'>SOCIAL</option>
-      <option link='".esc_url( home_url( '/' ) )."branding'>EMAIL MARKETING</option>
-      <option link='".esc_url( home_url( '/' ) )."branding'>CAMPAIGN</option>
-      <option link='".esc_url( home_url( '/' ) )."branding'>SEARCH ENGINE OPTIMIZATION</option>
+      <option link='".esc_url( home_url( '/' ) )."branding-service'>BRANDING</option>
+      <option link='".esc_url( home_url( '/' ) )."web-service'>WEB DESIGN</option>
+      <option link='".esc_url( home_url( '/' ) )."landing-service'>LANDING PAGE</option>
+      <option link='".esc_url( home_url( '/' ) )."email-service'>EMAIL MARKETING</option>
+      <option link='".esc_url( home_url( '/' ) )."campaign-service'>CAMPAIGN</option>
     </select>
   </div>
  ";
@@ -318,5 +319,152 @@ function services_cat_WithVC() {
     );
 }
 
+/*Services Category*/
+function slider_hero_shortcode( $atts ) {
+
+/* These arguments are going to function like variables, allowing us to set new values in the front-end editor */
+  $a = shortcode_atts( array(
+ 'slider_hero_text' => 'Button text',
+ 'slider_hero_link' => 'Link',
+ 'btn_class' => 'class'
+ ), $atts );
+
+ /* This is going to be our output */
+ return "
+ <div id = 'hero-slider' class = 'carousel slide'>
+
+    <!-- Carousel indicators -->
+    <ol class = 'carousel-indicators'>
+       <li data-target = '#hero-slider' data-slide-to = '0' class = 'active'></li>
+       <li data-target = '#hero-slider' data-slide-to = '1'></li>
+       <li data-target = '#hero-slider' data-slide-to = '2'></li>
+       <li data-target = '#hero-slider' data-slide-to = '3'></li>
+    </ol>
+
+    <!-- Carousel items -->
+    <div class = 'carousel-inner'>
+       <div class = 'item active'>
+         <div class='wpb_wrapper text-center'>
+          <div class='col-md-4 col-xs-12 text-center'>
+            <img src='http://irontekagency.com/wp-content/uploads/2016/06/digital-marketing.png' />
+          </div>
+          <div class='col-md-8 col-xs-12'>
+          <div class='section_title'>
+            <h1 class='uppr'>Digital Marketing</h1>
+            <div class='border_btm'></div>
+          </div>
+           <div class='wpb_raw_code wpb_content_element wpb_raw_html'>
+             <div class='wpb_wrapper'>
+               <p class='section_paragraph'>
+                We specialize in understanding your customer’s journey from awareness to consideration to purchase. We offer solutions from email marketing to search engine optimization, running campaigns to digital advertising and maintain your branding and online reputation.
+               </p>
+             </div>
+           </div>
+         <a href='#' class='btn primary-btn uppr digital-select hire-us'>Start A Project</a>
+
+          </div>
+         </div>
+       </div>
+
+       <div class = 'item'>
+         <div class='wpb_wrapper text-center'>
+          <div class='col-md-4 col-xs-12 text-center'>
+            <img src='http://irontekagency.com/wp-content/uploads/2016/06/resources-image.png'/>
+          </div>
+          <div class='col-md-8 col-xs-12'>
+          <div class='section_title'>
+            <h1 class='uppr'>Resources</h1>
+            <div class='border_btm'></div>
+          </div>
+           <div class='wpb_raw_code wpb_content_element wpb_raw_html'>
+             <div class='wpb_wrapper'>
+               <p class='section_paragraph'>
+                Our market platform offers quick solutions to finding the right themes, templates, images, videos, music, posters, business cards, photoshop and sketch files. Check our plans to learn more.
+               </p>
+             </div>
+           </div>
+         <a href='".esc_url( home_url( '/' ) )."resources' class='btn primary-btn uppr'>RESOURCES</a>
+         <a href='".esc_url( home_url( '/' ) )."resources/deals' class='btn primary-btn uppr border margin-left-md no-xs-margin-left xs-margin-top-md'>DEALS</a>
+          </div>
+         </div>
+       </div>
+
+       <div class = 'item'>
+         <div class='wpb_wrapper text-center'>
+          <div class='col-md-4 col-xs-12 text-center'>
+            <img src='http://irontekagency.com/wp-content/uploads/2016/06/design-dev.png' />
+          </div>
+          <div class='col-md-8 col-xs-12'>
+          <div class='section_title'>
+            <h1 class='uppr'>Design & Development</h1>
+            <div class='border_btm'></div>
+          </div>
+           <div class='wpb_raw_code wpb_content_element wpb_raw_html'>
+             <div class='wpb_wrapper'>
+               <p class='section_paragraph'>
+                We design and develop digital platforms, identities, campaigns and help you engage with your audience. We can help you with your new or existing product. Check our plans to learn more.
+               </p>
+             </div>
+           </div>
+         <a href='#' class='btn primary-btn uppr design-select hire-us'>Start A Project</a>
+          </div>
+         </div>
+       </div>
+
+       <div class = 'item'>
+         <div class='wpb_wrapper text-center'>
+          <div class='col-md-4 col-xs-12 text-center'>
+            <img src='http://irontekagency.com/wp-content/uploads/2016/06/recruitment-icon.png' />
+          </div>
+          <div class='col-md-8 col-xs-12'>
+          <div class='section_title'>
+            <h1 class='uppr'>HR | Recruitment</h1>
+            <div class='border_btm'></div>
+          </div>
+           <div class='wpb_raw_code wpb_content_element wpb_raw_html'>
+             <div class='wpb_wrapper'>
+               <p class='section_paragraph'>
+                With our Recruitment platform, You will be able to find and post jobs. Our mission is to make recruitment process easier for talents, companies and possible investors.
+               </p>
+             </div>
+           </div>
+         <a href='".esc_url( home_url( '/' ) )."employees' class='btn primary-btn uppr hire-us'>FIND EMPLOYEES</a>
+         <a href='".esc_url( home_url( '/' ) )."jobs' class='btn primary-btn uppr border margin-left-md no-xs-margin-left xs-margin-top-md'>FIND JOBS</a>
+          </div>
+         </div>
+       </div>
+    </div>
+
+    <!-- Carousel nav -->
+    <a class = 'carousel-control left' href = '#hero-slider' data-slide = 'prev'>&lsaquo;</a>
+    <a class = 'carousel-control right' href = '#hero-slider' data-slide = 'next'>&rsaquo;</a>
+ </div>
+ ";
+}
+
+add_shortcode( 'slider_hero', 'slider_hero_shortcode' );
+
+add_action( 'vc_before_init', 'slider_hero_WithVC' );
+
+function slider_hero_WithVC() {
+   vc_map( array(
+      "name" => __( "Slider Hero", "my-text-domain" ),
+      "base" => "slider_hero",
+      "class" => "",
+      "category" => __( "Content", "my-text-domain"),
+      "params" => array(
+         array(
+         'type' => 'textfield',
+         'holder' => 'div',
+         'class' => '',
+         'heading' => __( 'Slider' ),
+         'param_name' => 'slider_hero',
+         'value' => __( 'Services Category Text' ),
+         'description' => __( 'Enter button text here' )
+         )
+       )
+       )
+    );
+}
 
 ?>

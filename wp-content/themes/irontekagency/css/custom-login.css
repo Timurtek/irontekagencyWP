@@ -1,0 +1,98 @@
+html,body{
+background-color: #394153!important;
+}
+#login{width:320px; padding:0!important; background-color: #394153!important;}
+.login label {
+  font-size: 12px!important;
+  color: #555555!important;
+}
+
+.login input[type="text"]{
+  background-color: #ffffff!important;
+  border-color:#dddddd!important;
+  -webkit-border-radius: 4px!important;
+}
+
+.login input[type="password"]{
+  background-color: #ffffff!important;
+  border-color:#dddddd!important;
+  -webkit-border-radius: 4px!important;
+}
+.login .button-primary {
+  display: block!important;
+  margin-top:30px!important;
+  width:100%!important;
+  background-color:#50E3C2 !important;
+  background: -webkit-gradient(linear, left top, left bottom, from(#50E3C2), to(#50E3C2))!important;
+  background: -webkit-linear-gradient(top, #50E3C2, #50E3C2)!important;
+  background: -moz-linear-gradient(top, #50E3C2, #50E3C2)!important;
+  background: -ms-linear-gradient(top, #50E3C2, #50E3C2)!important;
+  background: -o-linear-gradient(top, #50E3C2, #50E3C2)!important;
+  background-image: -ms-linear-gradient(top, #50E3C2 0%, #50E3C2 100%)!important;
+  color: #ffffff!important;
+  -webkit-border-radius: 4px!important;
+  border: 1px solid #50E3C2!important;
+  border-radius:40px!important;
+  text-shadow:none!important;
+  box-shadow:none!important;
+
+}
+
+.login .button-primary:hover {
+  background-color:#ffffff !important;
+  color: #50E3C2!important;
+}
+
+.login .button-primary:active {
+  background-color:#50E3C2 !important;
+  color: #fff!important;
+  -webkit-border-radius: 4px!important;
+  border: 1px solid #0d9ed9!important;
+}
+
+.login  #loginform,
+.login #registerform,
+.login #lostpasswordform{
+  background: none!important;
+  box-shadow: none!important;
+}
+.login  #loginform label,
+.login #registerform label,
+.login #lostpasswordform label{color:#999999!important;}
+.login  #loginform input[type="text"],
+.login  #loginform input[type="password"],
+.login #registerform input[type="text"],
+.login #registerform input[type="email"],
+.login #lostpasswordform input[type="text"]{
+  border:none!important;
+  border-radius: 0!important;
+  background: none!important;
+  box-shadow:none!important;
+  border-bottom:2px solid #5F6A83!important;
+  color:#ffffff!important;
+}
+.login  #loginform input[type="text"]:focus,
+.login  #loginform input[type="password"]:focus,
+.login #registerform input[type="text"]:focus,
+.login #registerform input[type="email"]:focus,
+.login #lostpasswordform input[type="text"]:focus{
+  border-bottom:2px solid #50E3C2!important;
+}
+
+
+.login .wp-social-login-connect-with,
+.login p#reg_passmail{
+  color:#999999!important;
+}
+.login p#nav{color:#ffffff!important;}
+.login p#nav a{color:#00a0d2!important;}
+.login p.message{
+  border-left:4px solid #50E3C2!important;
+  border-radius: 4px!important;
+}
+.login h1 a {
+  background-image: url('../images/login-logo.png')!important;
+  background-size: 200px!important;
+  height: 200px!important;
+  width: 200px!important;
+}

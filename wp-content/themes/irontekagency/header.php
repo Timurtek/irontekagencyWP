@@ -13,14 +13,40 @@
 <html <?php language_attributes(); ?>>
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- For iOS web apps -->
+<meta name="viewport" content="width=device-width; initial-scale=1; minimal-ui">
 <link rel="profile" href="http://gmpg.org/xfn/11">
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
+	<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-79446015-1', 'auto');
+  ga('send', 'pageview');
+
+	</script>
+	<div id="search-pop" class="pop hide">
+		<a href="#" class="close-pop">
+			<svg width="40px" height="40px" viewBox="1846 35 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<g id="close" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(1846.000000, 35.000000)">
+							<path d="M37.9866667,39.5652174 C37.5837681,39.5652174 37.1785507,39.4110145 36.8707246,39.1031884 L0.896811594,3.12927536 C0.28057971,2.51362319 0.28057971,1.51246377 0.896811594,0.896811594 C1.51246377,0.28057971 2.51362319,0.28057971 3.12927536,0.896811594 L39.1031884,36.8707246 C39.7194203,37.4863768 39.7194203,38.4875362 39.1031884,39.1031884 C38.7953623,39.4110145 38.3901449,39.5652174 37.9866667,39.5652174 L37.9866667,39.5652174 Z" id="Fill-1" fill="#C0C5CF"></path>
+							<path d="M2.01333333,39.5652174 C1.60985507,39.5652174 1.20463768,39.4110145 0.896811594,39.1031884 C0.28057971,38.4875362 0.28057971,37.4863768 0.896811594,36.8707246 L36.8707246,0.896811594 C37.4863768,0.28057971 38.4875362,0.28057971 39.1031884,0.896811594 C39.7194203,1.51246377 39.7194203,2.51362319 39.1031884,3.12927536 L3.12927536,39.1031884 C2.82144928,39.4110145 2.41855072,39.5652174 2.01333333,39.5652174 L2.01333333,39.5652174 Z" id="Fill-2" fill="#C0C5CF"></path>
+					</g>
+			</svg>
+		</a>
+		<div class="container">
+			<div class="col-md-6 col-md-offset-3 col-xs-12">
+				<?php get_search_form(); ?>
+			</div>
+		</div>
+	</div>
 	<div id="single-gray-ajax" class="pop hide">
-		<a href="#" class="close">
+		<a href="#" class="close-pop">
 			<svg width="40px" height="40px" viewBox="1846 35 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 					<g id="close" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(1846.000000, 35.000000)">
 							<path d="M37.9866667,39.5652174 C37.5837681,39.5652174 37.1785507,39.4110145 36.8707246,39.1031884 L0.896811594,3.12927536 C0.28057971,2.51362319 0.28057971,1.51246377 0.896811594,0.896811594 C1.51246377,0.28057971 2.51362319,0.28057971 3.12927536,0.896811594 L39.1031884,36.8707246 C39.7194203,37.4863768 39.7194203,38.4875362 39.1031884,39.1031884 C38.7953623,39.4110145 38.3901449,39.5652174 37.9866667,39.5652174 L37.9866667,39.5652174 Z" id="Fill-1" fill="#C0C5CF"></path>
@@ -30,9 +56,24 @@
 		</a>
 		<div class="container"></div>
 	</div>
+	<div id="contact-us" class="pop hide">
+		<a href="#" class="close-pop">
+			<svg width="40px" height="40px" viewBox="1846 35 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<g id="close" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(1846.000000, 35.000000)">
+							<path d="M37.9866667,39.5652174 C37.5837681,39.5652174 37.1785507,39.4110145 36.8707246,39.1031884 L0.896811594,3.12927536 C0.28057971,2.51362319 0.28057971,1.51246377 0.896811594,0.896811594 C1.51246377,0.28057971 2.51362319,0.28057971 3.12927536,0.896811594 L39.1031884,36.8707246 C39.7194203,37.4863768 39.7194203,38.4875362 39.1031884,39.1031884 C38.7953623,39.4110145 38.3901449,39.5652174 37.9866667,39.5652174 L37.9866667,39.5652174 Z" id="Fill-1" fill="#C0C5CF"></path>
+							<path d="M2.01333333,39.5652174 C1.60985507,39.5652174 1.20463768,39.4110145 0.896811594,39.1031884 C0.28057971,38.4875362 0.28057971,37.4863768 0.896811594,36.8707246 L36.8707246,0.896811594 C37.4863768,0.28057971 38.4875362,0.28057971 39.1031884,0.896811594 C39.7194203,1.51246377 39.7194203,2.51362319 39.1031884,3.12927536 L3.12927536,39.1031884 C2.82144928,39.4110145 2.41855072,39.5652174 2.01333333,39.5652174 L2.01333333,39.5652174 Z" id="Fill-2" fill="#C0C5CF"></path>
+					</g>
+			</svg>
+		</a>
+		<div class="container">
+			<div class="col-md-6 col-md-offset-3 col-xs-12">
+				<?php echo do_shortcode('[contact-form-7 id="4" title="Contact form 1"]'); ?>
+			</div>
+		</div>
+	</div>
 	<div id="page" class="site">
 		<nav id="nav" class="navbar navbar-default navbar-fixed-top main_nav" role="navigation">
-			<div class="container">
+			<div class="container-fluid">
 						<!-- Brand and toggle get grouped for better mobile display -->
 						<div class="navbar-header">
 							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -72,7 +113,10 @@
 						    </g>
 						</svg>
 							</a>
-							<a class="navbar-brand text-brand xs-hide" href="<?php echo esc_url( home_url( '/' ) ); ?>">Irontek Agency</a>
+							<a class="navbar-brand text-brand xs-hide sm-hide" href="<?php echo esc_url( home_url( '/' ) ); ?>">Irontek Agency</a>
+							<ul class="nav navbar-nav navbar-left margin-left-sm search-nav">
+								<li><a href="#" class="search-link"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+							</ul>
 						</div>
 
 						<!-- Collect the nav links, forms, and other content for toggling -->

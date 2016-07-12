@@ -198,6 +198,7 @@ static  function ts_pricing_table( $atts , $content = null) {
 		   'css_awesome'=>'',
 		   'pricing_subtitle'=>'',
 		   'price_description'=>'',
+			 'btn_class'=>'',
 		   'image_service'=>'',
 
 		  ), $atts ));
@@ -211,7 +212,7 @@ static  function ts_pricing_table( $atts , $content = null) {
 								</div>
 								<h3>'.esc_attr($pricing_title).'</h3>';
 				$html .= apply_filters('the_content',$content);
-				$html .='<a class="cta_pricing" href="'.esc_url($pricing_link_button).'">'.$pricing_text_button.'</a>
+				$html .='<a class="cta_pricing '.$btn_class.'" href="'.esc_url($pricing_link_button).'">'.$pricing_text_button.'</a>
 							</div>';
 			}elseif($pricing_table_style =='style3'){
 				$html .='<div class="ts-pricing-table-style3 '.$class_active.'">
@@ -231,7 +232,7 @@ static  function ts_pricing_table( $atts , $content = null) {
 									<p>'.apply_filters('the_title',$price_description).'</p>
 								</div>';
 				$html .= apply_filters('the_content',$content);
-				$html .='<a class="cta_pricing" href="'.esc_url($pricing_link_button).'">'.$pricing_text_button.'</a>
+				$html .='<a class="cta_pricing '.$btn_class.'" href="'.esc_url($pricing_link_button).'">'.$pricing_text_button.'</a>
 							</div>';
 			}elseif($pricing_table_style=='style2'){
 				$html .='<div class="ts-pricing-table-style2 '.$class_active.'">
@@ -241,7 +242,7 @@ static  function ts_pricing_table( $atts , $content = null) {
 								<span class="unit">'.$pricing_unit.'</span>
 								</div>';
 				$html .= apply_filters('the_content',$content);
-				$html .='<a class="cta_pricing" href="'.esc_url($pricing_link_button).'">'.$pricing_text_button.'</a>
+				$html .='<a class="cta_pricing '.$btn_class.'" href="'.esc_url($pricing_link_button).'">'.$pricing_text_button.'</a>
 							</div>';
 			}else{
 				if(isset($image_service) && is_numeric($image_service))
@@ -259,7 +260,7 @@ static  function ts_pricing_table( $atts , $content = null) {
 								<div class="ts-price-unit"><span class="price">'.esc_attr($pricing_price).'</span>'.esc_attr( $pricing_unit).'</div>';
 				$html .= apply_filters('the_content',$content);
 
-				$html .='<a class="cta_pricing" href="'.esc_url($pricing_link_button).'">'.$pricing_text_button.'</a>
+				$html .='<a class="cta_pricing package-select" data-id="'.$pricing_link_button.'" href="#">'.$pricing_text_button.'</a>
 							</div>
 						 </div>'	;
 			}
