@@ -1,1 +1,0 @@
-/**	This package is part of ThemeStudio framework.*	Is available with all themes for compatibility*/
